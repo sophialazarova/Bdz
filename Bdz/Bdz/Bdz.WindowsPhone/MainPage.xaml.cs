@@ -22,11 +22,17 @@ namespace Bdz
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private IList<string> testItems;
         public MainPage()
         {
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            testItems = new List<string>()
+            {
+                "СОФИЯ","БУРГАС","ПЛОВДИВ","СМОЛЯН","СВОГЕ"
+            };
+
         }
 
         /// <summary>
@@ -43,6 +49,46 @@ namespace Bdz
             // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
             // If you are using the NavigationHelper provided by some templates,
             // this event is handled for you.
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.suggestions.ItemsSource != null)
+            {
+                this.suggestions.Visibility = Visibility.Collapsed;
+                this.departureTown.TextChanged -= new TextChangedEventHandler(departureTown_TextChanged);
+                if (this.suggestions.SelectedIndex != -1)
+                {
+                    this.departureTown.Text = this.suggestions.SelectedItem.ToString();
+                    
+                }
+
+                this.departureTown.TextChanged += new TextChangedEventHandler(departureTown_TextChanged);
+            }
+        }
+
+        private void departureTown_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string typed = (sender as TextBox).Text;
+            IList<string> matched = new List<string>();
+
+            if(String.IsNullOrEmpty(typed)){
+                return;
+            }
+
+            foreach (var item in this.testItems)
+            {
+                if (item.StartsWith(typed))
+                {
+                    matched.Add(item);
+                }
+            }
+
+            if (matched.Count > 0)
+            {
+                this.suggestions.ItemsSource = matched;
+                this.suggestions.Visibility = Visibility.Visible;
+            }
         }
     }
 }

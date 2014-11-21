@@ -9,6 +9,18 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="departureTown"
+                 Height="33"
+                 Margin="0,10,0,0"
+                 Grid.Row="0"
+                 TextChanged="departureTown_TextChanged"></TextBox>
+        <ListBox  Grid.Row="1"
+                  x:Name="suggestions"
+                  SelectionChanged="ListBox_SelectionChanged"
+                  Visibility="Collapsed"/>
     </Grid>
 </Page>
