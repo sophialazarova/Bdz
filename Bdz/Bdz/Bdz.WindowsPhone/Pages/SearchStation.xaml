@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Name="searchStationView"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="LayoutRoot">
@@ -41,15 +42,20 @@
                      PlaceholderText="Гара"
                      TextChanged="SearchStationTextChanged"
                      Height="auto"
-                     Grid.Row="0"/>
+                     Grid.Row="0"
+                     Text="{Binding Station, Mode=TwoWay}"/>
             <ListBox Grid.Row="1"
                      x:Name="suggestionsToStation"
                      Style="{StaticResource SuggestionTextBoxStyle}"
                      SelectionChanged="SuggestionsToStationSelectionChanged"></ListBox>
-            <DatePicker Grid.Row="2"/>
+            <DatePicker Grid.Row="2"
+                        Name="datePicker"
+                        Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Търси"
                     Grid.Row="3"
                     HorizontalAlignment="Center"
+                    Command="{Binding GetInformationForStation }"
+                    CommandParameter="{Binding ElementName=searchStationView}"
                     Margin="0 40 0 0"/>
         </Grid>
     </Grid>

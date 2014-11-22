@@ -99,7 +99,7 @@ namespace Bdz
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(SearchRoute), e.Arguments))
+                if (!rootFrame.Navigate(typeof(SearchStation), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

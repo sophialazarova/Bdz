@@ -156,7 +156,7 @@
                 departuringTrains.Add(new Train(parts[i], parts[i + 1], parts[i + 2]));
             }
 
-            for (int i = startingArrivals + 1; i < parts.Count - 1; i += 3)
+            for (int i = startingArrivals + 1; i < parts.Count - 2; i += 3)
             {
                 arrivingTrains.Add(new Train(parts[i], parts[i + 1], parts[i + 2]));
             }
