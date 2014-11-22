@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bdz.LocalDB;
+using Bdz.Pages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,7 +47,7 @@ namespace Bdz
         /// search results, and so forth.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -53,7 +55,9 @@ namespace Bdz
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-
+            LocalDBManager manager = LocalDBManager.Instance;
+            await manager.Initialize();
+            var testItems = await manager.RetrieveTownTable();
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -95,7 +99,7 @@ namespace Bdz
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(SearchRoute), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

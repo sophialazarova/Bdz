@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="Bdz.Pages.SearchRoute"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Bdz.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+            <TextBlock Text="БДЖ Справки " Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="Търсене" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <Line X1="3"  X2="800" HorizontalAlignment="Stretch" Fill="White" Stroke="White" StrokeThickness="8"></Line>
+        </StackPanel>
+
+        
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,40,19,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="departureTown"
+                     Height="auto"
+                     Margin="0,10,0,0"
+                     Grid.Row="0"
+                     PlaceholderText="Начална гара"
+                     TextChanged="StartStationTextBoxTextChanged"></TextBox>
+            <ListBox Grid.Row="1"
+                     x:Name="suggestionsToDeparture"
+                     Style="{StaticResource SuggestionTextBoxStyle}"
+                     SelectionChanged="StartStationListboxSelectionChanged"></ListBox>
+            <TextBox x:Name="arrivalTown"
+                     Height="auto"
+                     Margin="0,10,0,0"
+                     Grid.Row="3"
+                     PlaceholderText="Крайна гара"
+                     TextChanged="EndStationTextBoxTextChanged"></TextBox>
+            <ListBox Grid.Row="4"
+                     x:Name="suggestionsToArrival"
+                     Style="{StaticResource SuggestionTextBoxStyle}"
+                     SelectionChanged="EndStationListboxSelectionChanged"/>
+            
+            <DatePicker Grid.Row="6"></DatePicker>
+            
+            <Button Grid.Row="8"
+                    HorizontalAlignment="Center"
+                    Content="Търси"></Button>
+        </Grid>
+    </Grid>
+</Page>
