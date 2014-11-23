@@ -66,9 +66,9 @@
            this.searchAnswer = JsonConvert.DeserializeObject<StationInfoRequestObject>(response);
 
             //setting data to the helper class so that the next viewmodel can be populated
-           ListStationInfoHelper.Station = this.Station;
-           ListStationInfoHelper.Date = this.Date;
-           ListStationInfoHelper.StationInfo = this.searchAnswer;
+           ViewDataTransferHelper.Station = this.Station;
+           ViewDataTransferHelper.StationDetailsDate = this.Date;
+           ViewDataTransferHelper.StationInfo = this.searchAnswer;
 
            var frame = (userControl as Page).Frame;
            frame.Navigate(typeof(ListStationInfo));

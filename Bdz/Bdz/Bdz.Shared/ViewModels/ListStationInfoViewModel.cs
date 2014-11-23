@@ -14,11 +14,11 @@
 
         public ListStationInfoViewModel()
         {
-            this.Station = ListStationInfoHelper.Station;
-            this.date = ListStationInfoHelper.Date;
+            this.Station = ViewDataTransferHelper.Station;
+            this.date = ViewDataTransferHelper.StationDetailsDate;
             this.Date = this.date.Day + "/" + this.date.Month + "/" + this.date.Year;
-            this.Departure = ListStationInfoHelper.StationInfo.Departure;
-            this.Arrival = ListStationInfoHelper.StationInfo.Arrival;
+            this.Departure = ViewDataTransferHelper.StationInfo.Departure;
+            this.Arrival = ViewDataTransferHelper.StationInfo.Arrival;
         }
 
         public string Station { get; set; }

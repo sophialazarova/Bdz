@@ -27,7 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\TransitionItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLiteAsync.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ListStationInfoHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ViewDataTransferHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\RemoteDataManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\TownSuggestionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ListStationInfoViewModel.cs" />
