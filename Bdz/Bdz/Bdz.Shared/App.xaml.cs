@@ -57,7 +57,6 @@ namespace Bdz
 #endif
             LocalDBManager manager = LocalDBManager.Instance;
             await manager.Initialize();
-            var testItems = await manager.RetrieveTownTable();
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

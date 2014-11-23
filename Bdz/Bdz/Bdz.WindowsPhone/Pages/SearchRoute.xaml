@@ -73,5 +73,11 @@
                     Command="{Binding OnSearchButtonClick}"
                     CommandParameter="{Binding ElementName=searchRoutePage}"></Button>
         </Grid>
+        <ProgressRing IsActive="{Binding IsProgressRingActive, Mode=TwoWay}"
+                      Grid.Row="1"
+                      Height="350"
+                      Width="370"
+                      Background="Black"
+                      Margin="0 0 0 70"/>
     </Grid>
 </Page>

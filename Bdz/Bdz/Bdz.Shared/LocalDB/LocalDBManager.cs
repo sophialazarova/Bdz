@@ -107,14 +107,10 @@
             db = new SQLiteAsyncConnection("Bdz.db");
             await db.CreateTableAsync<Town>();
             var towns = await this.RetrieveTownTable();
-            for (int i = 0; i < this.towns.Count; i++)
-            {
-                townList.Add(new Town(this.towns[i]));
-            }
-
             if (towns.Count == 0)
             {
-                await this.AddRange(townList);
+                var townsRange = this.AddTownsToList();
+                await this.AddRange(townsRange);
             }
         }
 
@@ -128,6 +124,17 @@
             var query = db.Table<Town>();
             var result = await query.ToListAsync();
             return result;
+        }
+
+        private List<Town> AddTownsToList()
+        {
+            List<Town> townList = new List<Town>();
+            for (int i = 0; i < this.towns.Count; i++)
+            {
+                townList.Add(new Town(this.towns[i]));
+            }
+
+            return townList;
         }
     }
 }

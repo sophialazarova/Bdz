@@ -17,15 +17,30 @@
         private RemoteDataManager remoteManager;
         private DateTimeOffset date = DateTime.Today;
         private StationInfoRequestObject searchAnswer;
+        private bool isActive;
 
         public SearchStationViewModel()
         {
             this.remoteManager = new RemoteDataManager();
             this.searchAnswer = new StationInfoRequestObject();
+            this.isActive = false;
 
         }
 
         public string Station { get; set; }
+
+        public bool IsProgressRingActive 
+        {
+            get
+            {
+                return this.isActive;
+            }
+            set
+            {
+                this.isActive = value;
+                RaisePropertyChanged<bool>("IsProgressRingActive", !this.isActive, this.isActive, true);
+            }
+        }
 
         public DateTimeOffset Date
         {
@@ -67,9 +82,13 @@
             }
             else
             {
+                this.IsProgressRingActive = true;
+
                 this.searchAnswer = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day + "/" + this.Date.Month + "/" + this.Date.Year);
                 if (this.searchAnswer == null)
                 {
+                    this.IsProgressRingActive = false;
+
                     MessageDialog message = new MessageDialog("Няма намерени резултати!");
                     await message.ShowAsync();
                 }
@@ -78,6 +97,7 @@
                     ViewDataTransferHelper.Station = this.Station;
                     ViewDataTransferHelper.StationDetailsDate = this.Date;
                     ViewDataTransferHelper.StationInfo = this.searchAnswer;
+                    this.IsProgressRingActive = false;
 
                     var frame = (userControl as Page).Frame;
                     frame.Navigate(typeof(ListStationInfo));
