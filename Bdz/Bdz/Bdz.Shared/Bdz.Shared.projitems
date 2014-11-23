@@ -21,13 +21,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LocalDB\LocalDBManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LocalDB\Town.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\PassageStationInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RouteItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\StationInfoRequestObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TrainItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TransitionItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLiteAsync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ListStationInfoHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\RemoteDataManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\TownSuggestionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ListStationInfoViewModel.cs" />

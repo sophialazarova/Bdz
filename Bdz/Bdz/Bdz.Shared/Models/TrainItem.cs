@@ -9,10 +9,10 @@
             this.TrainNumber = trainNumber;
         }
 
-        public string Town { get;private set; }
+        public string Town { get; set; }
 
-        public string Time { get;private set; }
+        public string Time { get; set; }
 
-        public string TrainNumber { get;private set; }
+        public string TrainNumber { get; set; }
     }
 }

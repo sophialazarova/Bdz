@@ -7,7 +7,47 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <Style x:Name="TrainListItemTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Foreground" Value="DarkCyan"/>
+        </Style>
+        <DataTemplate x:Name="TrainListItemTemplate">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Town}"
+                           Grid.Row="0"
+                           HorizontalAlignment="Stretch"
+                           FontSize="27"></TextBlock>
+                <StackPanel Orientation="Horizontal"
+                             Grid.Row="1">
+                    <TextBlock Text="Час:"
+                               Style="{StaticResource TrainListItemTextBlockStyle}"
+                               Margin="0 0 3 0"
+                           ></TextBlock>
+                    <TextBlock Text="{Binding Time}"
+                               Style="{StaticResource TrainListItemTextBlockStyle}"
+                           ></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                             Grid.Row="2">
+                    <TextBlock Text="Влак:"
+                               Margin="0 0 3 0"
+                               Style="{StaticResource TrainListItemTextBlockStyle}"
+                           ></TextBlock>
+                    <TextBlock Text="{Binding TrainNumber}"
+                               Style="{StaticResource TrainListItemTextBlockStyle}"
+                           ></TextBlock>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
@@ -24,11 +64,57 @@
         <!-- Title Panel -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
             <TextBlock Text="{Binding Date}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
-            <TextBlock Text="{Binding Station}" Margin="0,-6.5,0,26.5" Style="{ThemeResource HeaderTextBlockStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <TextBlock Text="{Binding Station}" Margin="0,-6.5,0,26.5" Style="{ThemeResource ApplicationHeaderPageTitleStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0"
+                        Name="departure"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Content="Заминаващи"
+                        Click="OnDepartureButtonClick"></Button>
+                <Button Grid.Row="0"
+                        Name="arrival"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Content="Пристигащи"
+                        Click="OnArrivalButtonClick"></Button>
+                <Line X1="0"
+                      X2="800"
+                      HorizontalAlignment="Stretch"
+                      Fill="White"
+                      Stroke="White"
+                      StrokeThickness="8"
+                      Grid.Row="1"
+                      Grid.ColumnSpan="3"></Line>
+            </Grid>
+           
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.333,0,0">
+            <ListView Visibility="Collapsed"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Name="arrivalList"
+                      ItemsSource="{Binding Arrival}"
+                      ItemTemplate="{StaticResource TrainListItemTemplate}"></ListView>
+            <ListView Visibility="Collapsed"
+                      Name="departureList"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding Departure}"
+                      ItemTemplate="{StaticResource TrainListItemTemplate}"></ListView>
 
         </Grid>
     </Grid>

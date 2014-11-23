@@ -1,4 +1,6 @@
 ﻿using Bdz.Common;
+using Bdz.Utilities;
+using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -31,6 +34,7 @@ namespace Bdz.Pages
         public ListStationInfo()
         {
             this.InitializeComponent();
+            this.DataContext = new ListStationInfoViewModel();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -99,7 +103,6 @@ namespace Bdz.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            var s = e.Parameter;
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -108,5 +111,22 @@ namespace Bdz.Pages
         }
 
         #endregion
+
+        private void OnDepartureButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.departure.Background = new SolidColorBrush(Colors.DarkCyan);
+            this.arrival.Background = new SolidColorBrush(Colors.Black);
+            this.arrivalList.Visibility = Visibility.Collapsed;
+            this.departureList.Visibility = Visibility.Visible;
+        }
+
+        private void OnArrivalButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.arrival.Background = new SolidColorBrush(Colors.DarkCyan);
+            this.departure.Background = new SolidColorBrush(Colors.Black);
+            this.departureList.Visibility = Visibility.Collapsed;
+            this.arrivalList.Visibility = Visibility.Visible;
+           
+        }
     }
 }

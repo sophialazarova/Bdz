@@ -14,7 +14,6 @@
     using Windows.UI.Xaml.Controls;
     public class SearchStationViewModel : ViewModelBase
     {
-        private ObservableCollection<TrainItem> trains;
         private ICommand commandGetInformationForStation;
         private RemoteDataManager remoteManager;
         private DateTimeOffset date = DateTime.Today;
@@ -41,31 +40,7 @@
             }
         }
 
-        public IEnumerable<TrainItem> Trains
-        {
-            get
-            {
-                if (this.trains == null)
-                {
-                    this.trains = new ObservableCollection<TrainItem>();
-                }
-
-                return this.trains;
-            }
-            set
-            {
-                if (this.trains == null)
-                {
-                    this.trains = new ObservableCollection<TrainItem>();
-                }
-                this.trains.Clear();
-                foreach (var train in value)
-                {
-                    this.trains.Add(train);
-                }
-            }
-        }
-
+      
         public ICommand GetInformationForStation
         {
             get
@@ -82,8 +57,6 @@
         private void ExecuteSearchCommand(FrameworkElement userControl)
         {
             this.ExecuteRequestAsync(userControl);
-           
- 
         }
 
         private async void ExecuteRequestAsync(FrameworkElement userControl)
@@ -91,11 +64,14 @@
            var result = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day +"/" + this.Date.Month + "/" + this.Date.Year);
            var response = await result.Content.ReadAsStringAsync();
            this.searchAnswer = JsonConvert.DeserializeObject<StationInfoRequestObject>(response);
+
+            //setting data to the helper class so that the next viewmodel can be populated
+           ListStationInfoHelper.Station = this.Station;
+           ListStationInfoHelper.Date = this.Date;
+           ListStationInfoHelper.StationInfo = this.searchAnswer;
+
            var frame = (userControl as Page).Frame;
-           var parameter = new PassageStationInfo(this.Station, this.Date, this.searchAnswer);
-           frame.Navigate(typeof(ListStationInfo), parameter);
-           int a = 9;
-        
+           frame.Navigate(typeof(ListStationInfo));
         }   
 
     }

@@ -69,7 +69,7 @@
                     removeExtraParts(partsToRemove, entry);
                 }
                 var basic = basicInformation.Select(node => node.InnerText.Replace(" ", string.Empty).Trim().Replace("\r\n", ",").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
-               var result = this.ParseRouteInfo(basic, details);
+                var result = this.ParseRouteInfo(basic, details);
                 return Ok(result);
             }
         }
@@ -101,19 +101,16 @@
                 htmlDoc.LoadHtml(html);
                 var detailedInformation = htmlDoc.DocumentNode.SelectNodes("//table[@class=\"info_table\"]");
                 var parsed = detailedInformation.First().InnerText.Replace("\r\n", string.Empty);
-                var parts = parsed.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                var parts = parsed.Split(new string[] { "  " }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 var partsToRemove = new List<string> {"&nbsp;",
-                                                       "List)-->",
-                                                       "От",
-                                                       "гара/спирка",
-                                                       "Влак",
-                                                       "Коментар",
-                                                       "Заминава",
-                                                       "<!--(Empty",
-                                                       "Arr" };
+                                                  "От гара/спирка",
+                                                  "Влак",
+                                                  "Коментар",
+                                                  "Заминава",
+                                                   " <!--(Empty Arr List)-->"};
 
                 removeExtraParts(partsToRemove, parts);
-                var indexOfList = parts.IndexOf("List-->");
+                var indexOfList = parts.IndexOf("<!--Error:: Empty Dep List-->");
                 for (int i = 0; i < indexOfList + 1; i++)
                 {
                     parts.RemoveAt(0);

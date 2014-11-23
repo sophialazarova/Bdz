@@ -5,5 +5,13 @@
       <Setter Property="Height" Value="100" />
       <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
     </Style>
+        <Style TargetType="TextBlock" x:Key="ApplicationHeaderPageTitleStyle">
+            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilySemiLight}"/>
+            <Setter Property="FontSize" Value="50.5"/>
+            <Setter Property="FontWeight" Value="SemiLight"/>
+            <Setter Property="LineHeight" Value="57.5"/>
+            <Setter Property="TextWrapping" Value="NoWrap" />
+            <Setter Property="Foreground" Value="Cyan"/>
+        </Style>
   </Application.Resources>
 </Application>
