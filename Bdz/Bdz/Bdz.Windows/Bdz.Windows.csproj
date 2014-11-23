@@ -112,6 +112,9 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\ListRoutes.xaml.cs">
+      <DependentUpon>ListRoutes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ListStationInfo.xaml.cs">
       <DependentUpon>ListStationInfo.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\ListRoutes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ListStationInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

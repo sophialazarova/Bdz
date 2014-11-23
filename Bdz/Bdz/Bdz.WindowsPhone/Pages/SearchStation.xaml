@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Name="searchStationView"
+    Name="searchStationPage"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid x:Name="LayoutRoot">
@@ -55,7 +55,7 @@
                     Grid.Row="3"
                     HorizontalAlignment="Center"
                     Command="{Binding GetInformationForStation }"
-                    CommandParameter="{Binding ElementName=searchStationView}"
+                    CommandParameter="{Binding ElementName=searchStationPage}"
                     Margin="0 40 0 0"/>
         </Grid>
     </Grid>

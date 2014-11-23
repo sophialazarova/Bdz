@@ -1,26 +1,25 @@
-﻿using Bdz.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bdz.Utilities
+﻿namespace Bdz.Utilities
 {
+    using Bdz.Models;
+    using System;
+
    public static class  ViewDataTransferHelper
     {
+       /// <summary>
+       /// Used to pass to the next view the chosen station from <Station Info Search> page
+       /// </summary>
        public static string Station { get; set; }
 
        public static DateTimeOffset StationDetailsDate { get; set; }
 
        public static StationInfoRequestObject StationInfo { get; set; }
 
-       public static string RouteDepartureTime { get; set; }
+       public static RouteInfoRequestObject RouteInfo { get; set; }
 
-       public static string RouteArrivalTime { get; set; }
+       public static string RouteDepartureStation { get; set; }
 
-       public static string RouteDuration { get; set; }
+       public static string RouteArrivalStation { get; set; }
 
-       public static int RouteTransitions { get; set; }
-
-       public static List<TransitionItem> RouteDetails { get; set; }
+       public static DateTimeOffset RouteDate { get; set; }
     }
 }

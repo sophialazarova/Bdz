@@ -1,6 +1,4 @@
 ﻿using Bdz.Common;
-using Bdz.LocalDB;
-using Bdz.Utilities;
 using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,24 +24,19 @@ namespace Bdz.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SearchRoute : Page
+    public sealed partial class ListRoutes : Page
     {
-        private TownSuggestionHelper suggestionHelper;
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public SearchRoute()
+        public ListRoutes()
         {
             this.InitializeComponent();
-            this.DataContext = new SearchRouteViewModel();
-
-            this.suggestionHelper = new TownSuggestionHelper();
+            this.DataContext = new ListRoutesViewModel();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
-
-
         }
 
         /// <summary>
@@ -116,87 +109,5 @@ namespace Bdz.Pages
         }
 
         #endregion
-
-        private void StartStationListboxSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.SuggestionListBoxSelectionChanged(this.suggestionsToDeparture, this.departureTown);
-        }
-
-        private void StartStationTextBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.SuggestionTextBoxTextChanged(sender,this.suggestionsToDeparture);
-        }
-
-        private void EndStationListboxSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.SuggestionListBoxSelectionChanged(this.suggestionsToArrival, this.arrivalTown);
-        }
-
-        private void EndStationTextBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.SuggestionTextBoxTextChanged(sender,this.suggestionsToArrival);
-        }
-
-        private void SuggestionListBoxSelectionChanged(ListBox suggestions, TextBox choiceHolder)
-        {
-            if (suggestions.ItemsSource != null)
-            {
-                suggestions.Visibility = Visibility.Collapsed;
-                if (choiceHolder == this.arrivalTown)
-                {
-                    choiceHolder.TextChanged -= new TextChangedEventHandler(EndStationTextBoxTextChanged);
-                }
-                else
-                {
-                    choiceHolder.TextChanged -= new TextChangedEventHandler(StartStationTextBoxTextChanged);
-                }
-              
-                if (suggestions.SelectedIndex != -1)
-                {
-                    choiceHolder.Text = suggestions.SelectedItem.ToString();
-
-                }
-
-                if (choiceHolder == this.arrivalTown)
-                {
-                    choiceHolder.TextChanged += new TextChangedEventHandler(EndStationTextBoxTextChanged);
-                }
-                else
-                {
-                    choiceHolder.TextChanged += new TextChangedEventHandler(StartStationTextBoxTextChanged);
-                }
-            }
-        }
-
-        private void SuggestionTextBoxTextChanged(object sender, ListBox suggestions)
-        {
-            string typed = (sender as TextBox).Text.ToUpper();
-            IList<Town> matched = new List<Town>();
-
-
-            if (String.IsNullOrEmpty(typed))
-            {
-                suggestions.Visibility = Visibility.Collapsed;
-                return;
-            }
-
-            foreach (var item in this.suggestionHelper.Towns)
-            {
-                if (item.Name.StartsWith(typed))
-                {
-                    matched.Add(item);
-                }
-            }
-
-            if (matched.Count > 0)
-            {
-                suggestions.ItemsSource = matched;
-                suggestions.Visibility = Visibility.Visible;
-            }
-            else if (matched.Count == 0)
-            {
-                suggestions.Visibility = Visibility.Collapsed;
-            }
-        }
     }
 }

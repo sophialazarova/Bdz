@@ -7,8 +7,6 @@
     using GalaSoft.MvvmLight.Command;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Windows.Input;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
@@ -56,16 +54,13 @@
 
         private void ExecuteSearchCommand(FrameworkElement userControl)
         {
-            this.ExecuteRequestAsync(userControl);
+            this.HandleRequestAsync(userControl);
         }
 
-        private async void ExecuteRequestAsync(FrameworkElement userControl)
+        private async void HandleRequestAsync(FrameworkElement userControl)
         {
-           var result = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day +"/" + this.Date.Month + "/" + this.Date.Year);
-           var response = await result.Content.ReadAsStringAsync();
-           this.searchAnswer = JsonConvert.DeserializeObject<StationInfoRequestObject>(response);
+           this.searchAnswer = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day +"/" + this.Date.Month + "/" + this.Date.Year);
 
-            //setting data to the helper class so that the next viewmodel can be populated
            ViewDataTransferHelper.Station = this.Station;
            ViewDataTransferHelper.StationDetailsDate = this.Date;
            ViewDataTransferHelper.StationInfo = this.searchAnswer;

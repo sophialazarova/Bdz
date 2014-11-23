@@ -128,16 +128,17 @@
             removeFrom.RemoveAll(row => extras.IndexOf(row) >= 0);
         }
 
-        private IList<Route> ParseRouteInfo(IList<string[]> basic, IList<List<string>> detailed)
+        private IDictionary<string, IList<Route>> ParseRouteInfo(IList<string[]> basic, IList<List<string>> detailed)
         {
-            IList<Route> result = new List<Route>();
+            IDictionary<string, IList<Route>> result = new Dictionary<string, IList<Route>>();
+            IList<Route> possibleRoutes = new List<Route>();
             for (int i = 0; i < basic.Count; i++)
             {
                 var variant = basic[i];
-                result.Add(new Route(variant[1], variant[2], int.Parse(variant[4]), variant[5], detailed[i]));
+                possibleRoutes.Add(new Route(variant[1], variant[2], int.Parse(variant[4]), variant[5], detailed[i]));
 
             }
-
+            result.Add("Routes", possibleRoutes);
             return result;
         }
 
