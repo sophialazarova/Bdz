@@ -18,7 +18,6 @@
         </Style>
        
         <Style TargetType="TextBlock" x:Key="ApplicationHeaderPageTitleStyle">
-            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilySemiLight}"/>
             <Setter Property="FontSize" Value="50.5"/>
             <Setter Property="FontWeight" Value="SemiLight"/>
             <Setter Property="LineHeight" Value="57.5"/>
@@ -26,11 +25,39 @@
             <Setter Property="Foreground" Value="Cyan"/>
         </Style>
       
+        <Style x:Key="MainViewButtonLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="DarkCyan"/>
+        </Style>
+        <Style x:Key="MainViewButtonIconStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="50"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
         <Style x:Name="TrainListItemTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="DarkCyan"/>
         </Style>
-      
+        <DataTemplate x:Name="ToSearchForRoutesViewTemplate">
+            <StackPanel>
+                <TextBlock Text="&#xe11a;"
+                           FontFamily="Segoe UI Symbol"
+                           Style="{StaticResource MainViewButtonIconStyle}"></TextBlock>
+                <TextBlock Text="Търсене за маршрут"
+                           Style="{StaticResource MainViewButtonLabelStyle}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="ToStationInfoViewTemplate">
+            <StackPanel>
+                <TextBlock Text="&#xe139;"
+                           FontFamily="Segoe UI Symbol"
+                           Style="{StaticResource MainViewButtonIconStyle}"></TextBlock>
+                <TextBlock Text="Информация за гара"
+                           Style="{StaticResource MainViewButtonLabelStyle}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
         <DataTemplate x:Name="TrainListItemTemplate">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
