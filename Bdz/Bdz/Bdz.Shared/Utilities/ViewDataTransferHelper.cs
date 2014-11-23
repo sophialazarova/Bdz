@@ -21,5 +21,7 @@
        public static string RouteArrivalStation { get; set; }
 
        public static DateTimeOffset RouteDate { get; set; }
+
+       public static RouteItem SelectedItem { get; set; }
     }
 }

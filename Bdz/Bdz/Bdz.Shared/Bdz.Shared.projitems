@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\RouteItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\StationInfoRequestObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TrainItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TrainTransition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLiteAsync.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ViewDataTransferHelper.cs" />
@@ -32,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\TownSuggestionHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ListRoutesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ListStationInfoViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RouteDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchRouteViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchStationViewModel.cs" />
   </ItemGroup>

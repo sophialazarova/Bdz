@@ -1,6 +1,6 @@
 ﻿<Application x:Class="Bdz.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:Bdz">
-  <Application.Resources>
-      
+    <Application.Resources>
+        
         <Style TargetType="ListBox" x:Key="SuggestionTextBoxStyle">
             <Setter Property="Visibility" Value="Collapsed" />
             <Setter Property="Height" Value="100" />
@@ -11,7 +11,10 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="25"/>
         </Style>
-
+        <Style TargetType="TextBlock" x:Key="ListRoutesTitleStyle">
+            <Setter Property="Foreground" Value="Cyan"/>
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
         <Style TargetType="TextBlock" x:Key="RouteListItemLabelStyle">
             <Setter Property="Foreground" Value="DarkCyan"/>
             <Setter Property="FontSize" Value="15"/>
@@ -39,6 +42,13 @@
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Foreground" Value="DarkCyan"/>
         </Style>
+
+        <Style TargetType="TextBlock" x:Key="RouteDetailsLabelStyle">
+            <Setter Property="Foreground" Value="DarkCyan"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="0 0 4 0"/>
+        </Style>
+
         <DataTemplate x:Name="ToSearchForRoutesViewTemplate">
             <StackPanel>
                 <TextBlock Text="&#xe11a;"
@@ -160,6 +170,45 @@
                       Grid.Column="0"></Line>
 
             </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Name="RouteTransitionDetailTemplate">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding From}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="-"
+                               Margin="2 0 2 0"
+                               Style="{StaticResource RouteDetailsLabelStyle}"></TextBlock>
+                    <TextBlock Text="{Binding To}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Заминава:"
+                               Style="{StaticResource RouteDetailsLabelStyle}"></TextBlock>
+                    <TextBlock Text="{Binding DepartureTime}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Пристига:"
+                               Style="{StaticResource RouteDetailsLabelStyle}"></TextBlock>
+                    <TextBlock Text="{Binding ArrivalTime}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Влак:"
+                               Style="{StaticResource RouteDetailsLabelStyle}"></TextBlock>
+                    <TextBlock Text="{Binding TrainNumber}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <Line X1="3"
+                      X2="370"
+                      HorizontalAlignment="Stretch"
+                      Fill="DarkCyan"
+                      Stroke="DarkCyan"
+                      StrokeThickness="2"></Line>
+
+            </StackPanel>
         </DataTemplate>
       
     </Application.Resources>

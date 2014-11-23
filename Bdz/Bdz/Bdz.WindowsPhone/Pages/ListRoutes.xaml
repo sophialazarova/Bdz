@@ -7,12 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-        <Style TargetType="TextBlock" x:Key="ListRoutesTitleStyle">
-            <Setter Property="Foreground" Value="Cyan"/>
-            <Setter Property="FontSize" Value="30"/>
-        </Style>
-    </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
@@ -27,7 +21,8 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+        <StackPanel Grid.Row="0"
+                    Margin="19,0,0,0">
             <TextBlock Text="{Binding Date}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -44,9 +39,8 @@
                                CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"
                                Style="{StaticResource ListRoutesTitleStyle}"/>
                 </StackPanel>
-
             </StackPanel>
-            <Line X1="3"  X2="800" HorizontalAlignment="Stretch" Fill="White" Stroke="White" StrokeThickness="8"></Line>
+            <Line X1="3"  X2="800" HorizontalAlignment="Stretch" Fill="White" Stroke="White" StrokeThickness="8"/>
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
@@ -54,9 +48,8 @@
             <ListView VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
                       ItemsSource="{Binding Routes}"
-                      ItemTemplate="{StaticResource RouteListItemTemplate}">
-                      
-                
+                      ItemTemplate="{StaticResource RouteListItemTemplate}"
+                      SelectionChanged="RouteItemClick">
             </ListView>
         </Grid>
     </Grid>

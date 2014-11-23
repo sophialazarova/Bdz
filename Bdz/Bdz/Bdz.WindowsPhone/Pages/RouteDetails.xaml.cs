@@ -1,22 +1,38 @@
-﻿namespace Bdz.Pages
-{
-    using Bdz.Common;
-    using Bdz.Models;
-    using Bdz.Utilities;
-    using Bdz.ViewModels;
-    using System;
-    using Windows.UI.Xaml.Controls;
-    using Windows.UI.Xaml.Navigation;
+﻿using Bdz.Common;
+using Bdz.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 
-    public sealed partial class ListRoutes : Page
+// The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+
+namespace Bdz.Pages
+{
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class RouteDetails : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public ListRoutes()
+        public RouteDetails()
         {
             this.InitializeComponent();
-            this.DataContext = new ListRoutesViewModel();
+            this.DataContext = new RouteDetailsViewModel();
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -93,12 +109,5 @@
         }
 
         #endregion
-
-
-        private void RouteItemClick(object sender, SelectionChangedEventArgs e)
-        {
-            ViewDataTransferHelper.SelectedItem =  (RouteItem) e.AddedItems[0];
-            this.Frame.Navigate(typeof(RouteDetails));
-        }
     }
 }
