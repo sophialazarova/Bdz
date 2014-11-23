@@ -8,45 +8,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        <Style x:Name="TrainListItemTextBlockStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="DarkCyan"/>
-        </Style>
-        <DataTemplate x:Name="TrainListItemTemplate">
-            <Grid Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="{Binding Town}"
-                           Grid.Row="0"
-                           HorizontalAlignment="Stretch"
-                           FontSize="27"></TextBlock>
-                <StackPanel Orientation="Horizontal"
-                             Grid.Row="1">
-                    <TextBlock Text="Час:"
-                               Style="{StaticResource TrainListItemTextBlockStyle}"
-                               Margin="0 0 3 0"
-                           ></TextBlock>
-                    <TextBlock Text="{Binding Time}"
-                               Style="{StaticResource TrainListItemTextBlockStyle}"
-                           ></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal"
-                             Grid.Row="2">
-                    <TextBlock Text="Влак:"
-                               Margin="0 0 3 0"
-                               Style="{StaticResource TrainListItemTextBlockStyle}"
-                           ></TextBlock>
-                    <TextBlock Text="{Binding TrainNumber}"
-                               Style="{StaticResource TrainListItemTextBlockStyle}"
-                           ></TextBlock>
-                </StackPanel>
-            </Grid>
-        </DataTemplate>
+
+        
     </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
