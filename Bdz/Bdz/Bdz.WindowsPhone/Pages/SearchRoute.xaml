@@ -36,7 +36,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="auto"/>

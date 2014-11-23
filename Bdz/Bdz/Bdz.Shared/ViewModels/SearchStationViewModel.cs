@@ -8,6 +8,7 @@
     using Newtonsoft.Json;
     using System;
     using System.Windows.Input;
+    using Windows.UI.Popups;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     public class SearchStationViewModel : ViewModelBase
@@ -59,15 +60,29 @@
 
         private async void HandleRequestAsync(FrameworkElement userControl)
         {
-           this.searchAnswer = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day +"/" + this.Date.Month + "/" + this.Date.Year);
+            if (String.IsNullOrEmpty(this.Station))
+            {
+                MessageDialog message = new MessageDialog("Моля, задайте гара.");
+                await message.ShowAsync();
+            }
+            else
+            {
+                this.searchAnswer = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day + "/" + this.Date.Month + "/" + this.Date.Year);
+                if (this.searchAnswer == null)
+                {
+                    MessageDialog message = new MessageDialog("Няма намерени резултати!");
+                    await message.ShowAsync();
+                }
+                else
+                {
+                    ViewDataTransferHelper.Station = this.Station;
+                    ViewDataTransferHelper.StationDetailsDate = this.Date;
+                    ViewDataTransferHelper.StationInfo = this.searchAnswer;
 
-           ViewDataTransferHelper.Station = this.Station;
-           ViewDataTransferHelper.StationDetailsDate = this.Date;
-           ViewDataTransferHelper.StationInfo = this.searchAnswer;
-
-           var frame = (userControl as Page).Frame;
-           frame.Navigate(typeof(ListStationInfo));
+                    var frame = (userControl as Page).Frame;
+                    frame.Navigate(typeof(ListStationInfo));
+                }
+            }
         }   
-
     }
 }

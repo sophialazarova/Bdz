@@ -10,6 +10,7 @@
     using System.Collections.Generic;
     using System.Text;
     using System.Windows.Input;
+    using Windows.UI.Popups;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
 
@@ -61,16 +62,30 @@
 
         private async void HandleSearchAsync(FrameworkElement userControl)
         {
-            this.currentRouteInfo = await remoteManager.GetRouteInfo(this.From, this.To, this.Date.Day + "/" + this.Date.Month + "/" + this.Date.Year);
-           
-            ViewDataTransferHelper.RouteArrivalStation = this.To;
-            ViewDataTransferHelper.RouteDepartureStation = this.From;
-            ViewDataTransferHelper.RouteDate = this.Date;
-            ViewDataTransferHelper.RouteInfo = this.currentRouteInfo;
+            if (String.IsNullOrEmpty(this.From) || String.IsNullOrEmpty(this.To))
+            {
+                MessageDialog message = new MessageDialog("Моля, задайте начална и крайна гара.");
+                await message.ShowAsync();
+            }
+            else
+            {
+                this.currentRouteInfo = await remoteManager.GetRouteInfo(this.From, this.To, this.Date.Day + "/" + this.Date.Month + "/" + this.Date.Year);
+                if (this.currentRouteInfo.Routes == null || this.currentRouteInfo == null)
+                {
+                    MessageDialog message = new MessageDialog("Няма намерени резултати!");
+                    await message.ShowAsync();
+                }
+                else
+                {
+                    ViewDataTransferHelper.RouteArrivalStation = this.To;
+                    ViewDataTransferHelper.RouteDepartureStation = this.From;
+                    ViewDataTransferHelper.RouteDate = this.Date;
+                    ViewDataTransferHelper.RouteInfo = this.currentRouteInfo;
 
-            var frame = (userControl as Page).Frame;
-            frame.Navigate(typeof(ListRoutes));
-            
+                    var frame = (userControl as Page).Frame;
+                    frame.Navigate(typeof(ListRoutes));
+                }
+            }         
         }
     }
 }
