@@ -25,7 +25,7 @@
         </Grid.RowDefinitions>
 
         <!-- Title Panel -->
-        <StackPanel Grid.Row="0" Margin="19,0,0,0">
+        <StackPanel Grid.Row="0" Margin="19,0,0,0" Name="header">
             <TextBlock Text="{Binding Date}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
             <TextBlock Text="{Binding Station}" Margin="0,-6.5,0,26.5" Style="{ThemeResource ApplicationHeaderPageTitleStyle}" CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"/>
             <Grid>
@@ -72,7 +72,7 @@
             </Grid.RowDefinitions>
             <ListView Visibility="Collapsed"
                       Grid.Row="0"
-                      VerticalAlignment="Stretch"
+                      Height="450"
                       HorizontalAlignment="Stretch"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       Name="arrivalList"
@@ -81,12 +81,11 @@
             <ListView Visibility="Visible"
                       Grid.Row="0"
                       Name="departureList"
-                      VerticalAlignment="Stretch"
+                      Height="450"
                       HorizontalAlignment="Stretch"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ItemsSource="{Binding Departure}"
                       ItemTemplate="{StaticResource TrainListItemTemplate}"></ListView>
-
         </Grid>
     </Grid>
 </Page>

@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">БДЖ Справки</x:String>
     </Page.Resources>
 
     <!--
@@ -43,8 +43,50 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ApplicationHeaderPageTitleStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,30,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Заявка"
+                       Style="{StaticResource ListLablesStore}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Варианти"
+                       Style="{StaticResource ListLablesStore}"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding DepartureStation}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="-"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="{Binding ArrivalStation}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <TextBlock Text="{Binding Date}"
+                           Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+            </StackPanel>
+            <ListView Grid.Row="1"
+                      Grid.Column="1"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Routes}"
+                      ItemTemplate="{StaticResource RouteListItemTemplateStore}"
+                      SelectionChanged="RouteItemClick">
+            </ListView>
         </Grid>
     </Grid>
 </Page>

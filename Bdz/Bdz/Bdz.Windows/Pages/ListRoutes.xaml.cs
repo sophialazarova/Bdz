@@ -1,4 +1,7 @@
 ﻿using Bdz.Common;
+using Bdz.Models;
+using Bdz.Utilities;
+using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +51,8 @@ namespace Bdz.Pages
         public ListRoutes()
         {
             this.InitializeComponent();
+            this.DataContext = new ListRoutesViewModel();
+
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
@@ -102,5 +107,11 @@ namespace Bdz.Pages
         }
 
         #endregion
+
+        private void RouteItemClick(object sender, SelectionChangedEventArgs e)
+        {
+            ViewDataTransferHelper.SelectedItem = (RouteItem)e.AddedItems[0];
+            this.Frame.Navigate(typeof(RouteDetails));
+        }
     }
 }

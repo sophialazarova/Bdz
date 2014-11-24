@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">БДЖ Справки</x:String>
     </Page.Resources>
 
     <!--
@@ -43,8 +43,83 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ApplicationHeaderPageTitleStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,40,19,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Заявка"
+                       Style="{StaticResource ListLablesStore}"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalAlignment="Center"/>
+            <TextBlock Text="Обща информация"
+                       Style="{StaticResource ListLablesStore}"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"/>
+            <TextBlock Text="Информация за прекачвания"
+                       Style="{StaticResource ListLablesStore}"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"/>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding DepartureStation}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="-"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="{Binding ArrivalStation}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                            Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Заминава:"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="{Binding DepartureTime}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Пристига:"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="{Binding ArrivalTime}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Прекачвания:"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="{Binding Transitions}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Времетраене:"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                    <TextBlock Text="{Binding Duration}"
+                               Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <ListView Grid.Column="2"
+                  Grid.Row="1"
+                      Name="transitionDetails"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ItemsSource="{Binding Route}"
+                      ItemTemplate="{StaticResource RouteTransitionDetailTemplate}" >
+        </ListView>
+    </Grid>
     </Grid>
 </Page>

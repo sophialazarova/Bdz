@@ -87,14 +87,18 @@
                 <TextBlock Text="{Binding Duration}"
                            Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
             </StackPanel>
-
-            <TextBlock Text="Информация за прекачванията:"
-                        Style="{StaticResource RouteDetailsLabelStyle}"
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                       Margin="0 60 0 10"></TextBlock>
+                <TextBlock Text="Информация за прекачванията:"
+                           Style="{StaticResource RouteDetailsLabelStyle}"
+                           Margin="0 60 0 10"
+                           Name="transitionsInfoLabel"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Tapped="TransitionsInfoLabelTapped"></TextBlock>
+            
+            
             <ListView Grid.Column="0"
+                      Name="transitionDetails"
                       Grid.ColumnSpan="2"
                       Height="320"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"

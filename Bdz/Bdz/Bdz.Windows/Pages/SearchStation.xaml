@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">БДЖ Справки</x:String>
     </Page.Resources>
 
     <!--
@@ -43,8 +43,44 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ApplicationHeaderPageTitleStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,80,19,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="searchStation"
+                     PlaceholderText="Гара"
+                     TextChanged="SearchStationTextChanged"
+                     Height="50"
+                     Width="500"
+                     Grid.Row="0"
+                     Text="{Binding Station, Mode=TwoWay}"/>
+            <ListBox Grid.Row="1"
+                     Width="500"
+                     Height="150"
+                     x:Name="suggestionsToStation"
+                     Style="{StaticResource SuggestionTextBoxStyle}"
+                     SelectionChanged="SuggestionsToStationSelectionChanged"></ListBox>
+            <DatePicker Grid.Row="2"
+                        Name="datePicker"
+                        Margin="0 40 0 0"
+                        HorizontalAlignment="Center"
+                        Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Търси"
+                    Grid.Row="3"
+                    HorizontalAlignment="Center"
+                    Command="{Binding GetInformationForStation }"
+                    CommandParameter="{Binding ElementName=pageRoot}"
+                    Margin="0 60 0 0"
+                    Width="200"
+                    Height="60"/>
         </Grid>
     </Grid>
 </Page>

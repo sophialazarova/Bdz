@@ -20,9 +20,9 @@
         {
             this.InitializeComponent();
             this.DataContext = new ListStationInfoViewModel();
-            this.ContentRoot.ManipulationMode = ManipulationModes.TranslateX;
-            this.ContentRoot.ManipulationStarted += ContentRoot_ManipulationStarted;
-            this.ContentRoot.ManipulationCompleted +=ContentRoot_ManipulationCompleted;
+            this.header.ManipulationMode = ManipulationModes.TranslateX;
+            this.header.ManipulationStarted += ContentRoot_ManipulationStarted;
+            this.header.ManipulationCompleted += ContentRoot_ManipulationCompleted;
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;

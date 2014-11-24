@@ -1,4 +1,5 @@
 ﻿using Bdz.Common;
+using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +49,8 @@ namespace Bdz.Pages
         public RouteDetails()
         {
             this.InitializeComponent();
+            this.DataContext = new RouteDetailsViewModel();
+
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;

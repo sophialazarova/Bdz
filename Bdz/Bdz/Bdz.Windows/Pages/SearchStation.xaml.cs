@@ -1,4 +1,7 @@
 ﻿using Bdz.Common;
+using Bdz.LocalDB;
+using Bdz.Utilities;
+using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,6 +28,7 @@ namespace Bdz.Pages
     {
 
         private NavigationHelper navigationHelper;
+        private TownSuggestionHelper suggestionHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         /// <summary>
@@ -48,6 +52,9 @@ namespace Bdz.Pages
         public SearchStation()
         {
             this.InitializeComponent();
+            this.DataContext = new SearchStationViewModel();
+            this.suggestionHelper = new TownSuggestionHelper();
+
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;
@@ -102,5 +109,54 @@ namespace Bdz.Pages
         }
 
         #endregion
+
+        private void SearchStationTextChanged(object sender, TextChangedEventArgs e)
+        {
+            string typed = (sender as TextBox).Text.ToUpper();
+            IList<Town> matched = new List<Town>();
+
+
+            if (String.IsNullOrEmpty(typed))
+            {
+                this.suggestionsToStation.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            foreach (var item in this.suggestionHelper.Towns)
+            {
+                if (item.Name.StartsWith(typed))
+                {
+                    matched.Add(item);
+                }
+            }
+
+            if (matched.Count > 0)
+            {
+                this.suggestionsToStation.ItemsSource = matched;
+                this.suggestionsToStation.Visibility = Visibility.Visible;
+            }
+            else if (matched.Count == 0)
+            {
+                this.suggestionsToStation.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SuggestionsToStationSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (this.suggestionsToStation.ItemsSource != null)
+            {
+                this.suggestionsToStation.Visibility = Visibility.Collapsed;
+                this.searchStation.TextChanged -= new TextChangedEventHandler(SearchStationTextChanged);
+
+                if (this.suggestionsToStation.SelectedIndex != -1)
+                {
+                    this.searchStation.Text = this.suggestionsToStation.SelectedItem.ToString();
+
+                }
+
+                this.searchStation.TextChanged += new TextChangedEventHandler(SearchStationTextChanged);
+
+            }
+        }
     }
 }

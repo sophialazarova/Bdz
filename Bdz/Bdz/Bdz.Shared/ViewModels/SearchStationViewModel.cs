@@ -85,7 +85,7 @@
                 this.IsProgressRingActive = true;
 
                 this.searchAnswer = await this.remoteManager.GetStationInfo(this.Station, this.Date.Day + "/" + this.Date.Month + "/" + this.Date.Year);
-                if (this.searchAnswer == null)
+                if (this.searchAnswer == null || (this.searchAnswer.Arrival == null && this.searchAnswer.Departure == null))
                 {
                     this.IsProgressRingActive = false;
 

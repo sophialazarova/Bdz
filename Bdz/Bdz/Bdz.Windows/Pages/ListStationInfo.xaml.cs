@@ -1,4 +1,5 @@
 ﻿using Bdz.Common;
+using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +49,7 @@ namespace Bdz.Pages
         public ListStationInfo()
         {
             this.InitializeComponent();
+            this.DataContext = new ListStationInfoViewModel();
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += navigationHelper_LoadState;
             this.navigationHelper.SaveState += navigationHelper_SaveState;

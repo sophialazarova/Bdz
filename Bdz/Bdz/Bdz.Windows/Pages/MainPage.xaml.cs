@@ -102,5 +102,15 @@ namespace Bdz.Pages
         }
 
         #endregion
+
+        private void SearchStationButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SearchStation));
+        }
+
+        private void SearchRouteButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SearchRoute));
+        }
     }
 }

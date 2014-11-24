@@ -12,7 +12,7 @@
 
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
-        <x:String x:Key="AppName">My Application</x:String>
+        <x:String x:Key="AppName">БДЖ Справки</x:String>
     </Page.Resources>
 
     <!--
@@ -43,8 +43,27 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource ApplicationHeaderPageTitleStyle}" Grid.Column="1"
+                        IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,24"/>
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="ContentRoot">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Button ContentTemplate="{StaticResource ToSearchForRoutesViewTemplate}"
+                        FontFamily="Segoe UI Symbol"
+                        HorizontalAlignment="Stretch"
+                        Width="500"
+                        Height="200"
+                        Click="SearchRouteButtonClick"
+                        Margin="0 0 0 15"/>
+                <Button ContentTemplate="{StaticResource ResourceKey=ToStationInfoViewTemplate}"
+                	FontFamily="Segoe UI Symbol"
+                        HorizontalAlignment="Stretch"
+                        Width="500"
+                        Height="200"
+                        Click="SearchStationButtonClick"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

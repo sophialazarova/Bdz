@@ -28,11 +28,13 @@ namespace Bdz.Pages
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private bool areTransitionDetailsShowed;
 
         public RouteDetails()
         {
             this.InitializeComponent();
             this.DataContext = new RouteDetailsViewModel();
+            this.areTransitionDetailsShowed = true;
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -113,6 +115,19 @@ namespace Bdz.Pages
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void TransitionsInfoLabelTapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.areTransitionDetailsShowed = !this.areTransitionDetailsShowed;
+            if (this.areTransitionDetailsShowed)
+            {
+                this.transitionDetails.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.transitionDetails.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
