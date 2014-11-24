@@ -96,9 +96,11 @@
                        Margin="0 60 0 10"></TextBlock>
             <ListView Grid.Column="0"
                       Grid.ColumnSpan="2"
+                      Height="320"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
                       Grid.Row="3"
                       ItemsSource="{Binding Route}"
-                      ItemTemplate="{StaticResource RouteTransitionDetailTemplate}">
+                      ItemTemplate="{StaticResource RouteTransitionDetailTemplate}" SelectionChanged="ListView_SelectionChanged">
             </ListView>
         </Grid>
     </Grid>

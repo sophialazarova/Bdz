@@ -89,7 +89,7 @@
                 {
                     this.IsProgressRingActive = false;
 
-                    MessageDialog message = new MessageDialog("Няма намерени резултати!");
+                    MessageDialog message = new MessageDialog("Грешка на сървъра. Опитайте по-късно.");
                     await message.ShowAsync();
                 }
                 else

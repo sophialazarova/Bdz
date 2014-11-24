@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
 
-        
+
     </Page.Resources>
     <Grid x:Name="LayoutRoot">
 
@@ -43,7 +43,8 @@
                         Grid.Column="0"
                         HorizontalAlignment="Left"
                         Content="Заминаващи"
-                        Click="OnDepartureButtonClick"></Button>
+                        Click="OnDepartureButtonClick"
+                        Background="DarkCyan"></Button>
                 <Button Grid.Row="0"
                         Name="arrival"
                         Grid.Column="1"
@@ -59,19 +60,26 @@
                       Grid.Row="1"
                       Grid.ColumnSpan="3"></Line>
             </Grid>
-           
+
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.333,0,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot"
+              Margin="19,9.333,0,0"
+              Background="Transparent">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
             <ListView Visibility="Collapsed"
+                      Grid.Row="0"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       Name="arrivalList"
                       ItemsSource="{Binding Arrival}"
                       ItemTemplate="{StaticResource TrainListItemTemplate}"></ListView>
-            <ListView Visibility="Collapsed"
+            <ListView Visibility="Visible"
+                      Grid.Row="0"
                       Name="departureList"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"

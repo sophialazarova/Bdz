@@ -10,6 +10,8 @@
        /// </summary>
        public static string Station { get; set; }
 
+       public static string CurrentDeviceLocation { get; set; }
+
        public static DateTimeOffset StationDetailsDate { get; set; }
 
        public static StationInfoRequestObject StationInfo { get; set; }

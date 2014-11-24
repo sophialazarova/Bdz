@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -17,6 +18,13 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+#if WINDOWS_PHONE_APP
+using Windows.Services.Maps;
+using Bdz.Utilities;
+using Windows.UI.Popups;
+using System.Threading.Tasks;
+#endif
+
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -29,6 +37,7 @@ namespace Bdz
     {
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
+        
 #endif
 
         /// <summary>
@@ -90,7 +99,7 @@ namespace Bdz
                         this.transitions.Add(c);
                     }
                 }
-
+                await this.GetDeviceCurrentLocation();
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 #endif
@@ -136,5 +145,40 @@ namespace Bdz
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+#if WINDOWS_PHONE_APP
+        private async Task GetDeviceCurrentLocation()
+        {
+            Geolocator geolocator = new Geolocator();
+            geolocator.DesiredAccuracyInMeters = 50;
+
+            try
+            {
+                Geoposition geoposition = await geolocator.GetGeopositionAsync();
+
+                BasicGeoposition currentLocation = new BasicGeoposition
+                {
+                    Longitude = geoposition.Coordinate.Longitude,
+                    Latitude = geoposition.Coordinate.Latitude
+
+                };
+                Geopoint pointToReverseGeocode = new Geopoint(currentLocation);
+                MapLocationFinderResult result = await MapLocationFinder.FindLocationsAtAsync(pointToReverseGeocode);
+                if (result.Locations.Count != 0)
+                {
+                    ViewDataTransferHelper.CurrentDeviceLocation = result.Locations[0].Address.Town;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageDialog error = new MessageDialog("Unable to determine current location.");
+                error.ShowAsync();
+            }
+        }
+#endif
+
     }
 }

@@ -109,5 +109,10 @@ namespace Bdz.Pages
         }
 
         #endregion
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

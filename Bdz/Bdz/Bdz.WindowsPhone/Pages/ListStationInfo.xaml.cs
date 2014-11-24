@@ -6,22 +6,51 @@
     using Windows.UI;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
     using Windows.UI.Xaml.Media;
     using Windows.UI.Xaml.Navigation;
+    using Windows.Devices.Geolocation;
 
     public sealed partial class ListStationInfo : Page
     {
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
-
+        
         public ListStationInfo()
         {
             this.InitializeComponent();
             this.DataContext = new ListStationInfoViewModel();
+            this.ContentRoot.ManipulationMode = ManipulationModes.TranslateX;
+            this.ContentRoot.ManipulationStarted += ContentRoot_ManipulationStarted;
+            this.ContentRoot.ManipulationCompleted +=ContentRoot_ManipulationCompleted;
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+        }
+
+        private void ContentRoot_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (e.Velocities.Linear.X < 0)
+            {
+                this.departureList.Visibility = Visibility.Collapsed;
+                this.arrivalList.Visibility = Visibility.Visible;
+                this.arrival.Background = new SolidColorBrush(Colors.DarkCyan);
+                this.departure.Background = new SolidColorBrush(Colors.Black);
+
+            }
+            else if (e.Velocities.Linear.X > 0)
+            {
+                this.departureList.Visibility = Visibility.Visible;
+                this.arrivalList.Visibility = Visibility.Collapsed;
+                this.arrival.Background = new SolidColorBrush(Colors.Black);
+                this.departure.Background = new SolidColorBrush(Colors.DarkCyan);
+            }
+        }
+
+        private void ContentRoot_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            
         }
 
         /// <summary>
@@ -109,7 +138,31 @@
             this.departure.Background = new SolidColorBrush(Colors.Black);
             this.departureList.Visibility = Visibility.Collapsed;
             this.arrivalList.Visibility = Visibility.Visible;
-           
+
+        }
+
+        private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+
+        }
+
+        private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (e.Velocities.Linear.X < 0)
+            {
+                this.departureList.Visibility = Visibility.Collapsed;
+                this.arrivalList.Visibility = Visibility.Visible;
+                this.arrival.Background = new SolidColorBrush(Colors.DarkCyan);
+                this.departure.Background = new SolidColorBrush(Colors.Black);
+
+            }
+            else if (e.Velocities.Linear.X > 0)
+            {
+                this.departureList.Visibility = Visibility.Visible;
+                this.arrivalList.Visibility = Visibility.Collapsed;
+                this.arrival.Background = new SolidColorBrush(Colors.Black);
+                this.departure.Background = new SolidColorBrush(Colors.DarkCyan);
+            }
         }
     }
 }

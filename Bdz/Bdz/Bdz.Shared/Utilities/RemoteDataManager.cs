@@ -23,10 +23,16 @@
            request.Method = HttpMethod.Get;
            request.RequestUri = new Uri(getStationInfoUrl + "?station=" + name + "&date=" + date);
            var response = await client.SendAsync(request);
-           var content = await response.Content.ReadAsStringAsync();
-           var contentAsJson = this.DeserializeJson<StationInfoRequestObject>(content);
-           return contentAsJson;
-     
+           if (response.IsSuccessStatusCode)
+           {
+               var content = await response.Content.ReadAsStringAsync();
+               var contentAsJson = this.DeserializeJson<StationInfoRequestObject>(content);
+               return contentAsJson;
+           }
+           else
+           {
+               return new StationInfoRequestObject();
+           }
        }
 
        public async Task<RouteInfoRequestObject> GetRouteInfo(string from, string to, string date)

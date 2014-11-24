@@ -37,7 +37,10 @@ namespace Bdz.Pages
             this.InitializeComponent();
             this.suggestionHelper = new TownSuggestionHelper();
             this.DataContext = new SearchStationViewModel();
-
+            if (ViewDataTransferHelper.CurrentDeviceLocation != null)
+            {
+                this.SetTextboxValueToDeviceLocation(ViewDataTransferHelper.CurrentDeviceLocation);
+            }
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -161,7 +164,19 @@ namespace Bdz.Pages
                 }
 
                 this.searchStation.TextChanged += new TextChangedEventHandler(SearchStationTextChanged);
-               
+
+            }
+        }
+
+        private void SetTextboxValueToDeviceLocation(string location)
+        {
+            switch (location)
+            {
+                case "Sofia":
+                    {
+                        this.searchStation.Text = "СОФИЯ";
+                        break;
+                    }
             }
         }
     }

@@ -12,6 +12,7 @@
         private IList<TrainTransition> route;
         public RouteDetailsViewModel()
         {
+
             this.DepartureStation = ViewDataTransferHelper.RouteDepartureStation;
             this.ArrivalStation = ViewDataTransferHelper.RouteArrivalStation;
             this.date = ViewDataTransferHelper.RouteDate;

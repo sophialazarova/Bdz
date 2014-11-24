@@ -8,7 +8,6 @@
     mc:Ignorable="d"
     Name="searchStationPage"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid x:Name="LayoutRoot">
 
         <Grid.ChildrenTransitions>
@@ -66,5 +65,6 @@
                       Width="370"
                       Background="Black"
                       Margin="0 0 0 230"/>
+
     </Grid>
 </Page>

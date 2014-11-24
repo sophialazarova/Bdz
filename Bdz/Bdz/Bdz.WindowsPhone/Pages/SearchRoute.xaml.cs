@@ -36,7 +36,10 @@ namespace Bdz.Pages
         {
             this.InitializeComponent();
             this.DataContext = new SearchRouteViewModel();
-
+            if (ViewDataTransferHelper.CurrentDeviceLocation != null)
+            {
+                this.SetTextboxValueToDeviceLocation(ViewDataTransferHelper.CurrentDeviceLocation);
+            }
             this.suggestionHelper = new TownSuggestionHelper();
 
             this.navigationHelper = new NavigationHelper(this);
@@ -44,6 +47,18 @@ namespace Bdz.Pages
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
 
+        }
+
+        private void SetTextboxValueToDeviceLocation(string location)
+        {
+            switch (location)
+            {
+                case "Sofia":
+                    {
+                        this.departureTown.Text = "СОФИЯ";
+                        break;
+                    }
+            }
         }
 
         /// <summary>
