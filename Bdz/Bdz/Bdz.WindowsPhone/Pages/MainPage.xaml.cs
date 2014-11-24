@@ -102,6 +102,8 @@ namespace Bdz.Pages
         protected override  void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+         //   ToastManager manager = new ToastManager();
+         //   manager.SendToast("test", "toast");
            
         }
 

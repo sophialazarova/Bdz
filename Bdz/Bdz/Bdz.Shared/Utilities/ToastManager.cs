@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
-
-namespace Bdz.Utilities
+﻿namespace Bdz.Utilities
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using Windows.Data.Xml.Dom;
+    using Windows.UI.Notifications;
+
    public class ToastManager
     {
        private ToastTemplateType toastTemplate;
@@ -19,12 +19,20 @@ namespace Bdz.Utilities
 
        public void SendToast(string heading, string content)
        {
-           var toast = this.FillToast(heading, content);
+           this.FillToast(heading, content);
+           ToastNotification toast = new ToastNotification(this.toastTemplateXml);
            toast.ExpirationTime = DateTimeOffset.UtcNow.AddSeconds(3600);
            ToastNotificationManager.CreateToastNotifier().Show(toast);
        }
 
-       private ToastNotification FillToast(string heading, string content)
+       public void SendScheduledToast(string heading, string content, DateTimeOffset trigger)
+       {
+           this.FillToast(heading, content);
+           ScheduledToastNotification toast = new ScheduledToastNotification(this.toastTemplateXml, trigger);
+           ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+       }
+
+       private void FillToast(string heading, string content)
        {
            XmlNodeList toastTextElements = this.toastTemplateXml.GetElementsByTagName("text");
            toastTextElements[0].AppendChild(this.toastTemplateXml.CreateTextNode(heading));
@@ -32,9 +40,6 @@ namespace Bdz.Utilities
 
            IXmlNode toastNode = this.toastTemplateXml.SelectSingleNode("/toast");
            ((XmlElement)toastNode).SetAttribute("duration", "long");
-
-           ToastNotification toast = new ToastNotification(this.toastTemplateXml);
-           return toast;
        }
     }
 }

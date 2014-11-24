@@ -23,12 +23,15 @@
 
         <!-- Title Panel -->
         <StackPanel Grid.Row="0" Margin="19,0,0,0">
-            <TextBlock Text="{Binding Date}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,12,0,0"/>
+            <TextBlock Text="{Binding Date}" Style="{ThemeResource TitleTextBlockStyle}"
+                       Margin="0,12,0,0"
+                       Name="DepartureDate"/>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="От:"
                                Style="{StaticResource ListRoutesTitleStyle}"></TextBlock>
                     <TextBlock Text="{Binding DepartureStation}"
+                               Name="DepartureStation"
                                CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"
                                Style="{StaticResource ListRoutesTitleStyle}"/>
                 </StackPanel>
@@ -36,6 +39,7 @@
                     <TextBlock Text="До:"
                                Style="{StaticResource ListRoutesTitleStyle}"></TextBlock>
                     <TextBlock Text="{Binding ArrivalStation}" 
+                               Name="ArrivalStation"
                                CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}"
                                Style="{StaticResource ListRoutesTitleStyle}"/>
                 </StackPanel>
@@ -44,7 +48,10 @@
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,40,19,0">
+        <Grid Grid.Row="1" x:Name="ContentRoot"
+              Margin="19,40,19,0"
+              Background="Transparent"
+              Holding="OnHoldingDetailsGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -61,6 +68,7 @@
                 <TextBlock Text="Заминава:"
                            Style="{StaticResource RouteDetailsLabelStyle}"></TextBlock>
                 <TextBlock Text="{Binding DepartureTime}"
+                           Name="DepartureTime"
                            Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
@@ -106,6 +114,34 @@
                       ItemsSource="{Binding Route}"
                       ItemTemplate="{StaticResource RouteTransitionDetailTemplate}" SelectionChanged="ListView_SelectionChanged">
             </ListView>
+            
+        </Grid>
+        <Grid Background="Black"
+              Name="toastCreatorMenu"
+              Grid.Row="1"
+              Visibility="Collapsed"
+              Holding="OnHoldingToastCreatorMenu">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Известия"
+                       Grid.Row="0"
+                       HorizontalAlignment="Center"
+                       FontSize="25"></TextBlock>
+            <StackPanel Grid.Row="1"
+                        Margin="0 50 0 40">
+                <TextBlock Text="Извести ме за потеглянето на този влак на:"
+                           FontSize="18"
+                           ></TextBlock>
+                <DatePicker Name="triggerDate"></DatePicker>
+                <TimePicker Name="triggerHour"></TimePicker>
+            </StackPanel>
+            <Button Grid.Row="2"
+                    Content="Запази"
+                    HorizontalAlignment="Center"
+                    Click="OnClickCreateToast"></Button>
         </Grid>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
 ﻿using Bdz.Common;
+using Bdz.Utilities;
 using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -128,6 +129,28 @@ namespace Bdz.Pages
             {
                 this.transitionDetails.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void OnHoldingDetailsGrid(object sender, HoldingRoutedEventArgs e)
+        {
+            this.toastCreatorMenu.Visibility = Visibility.Visible;
+        }
+
+        private void OnHoldingToastCreatorMenu(object sender, HoldingRoutedEventArgs e)
+        {
+            this.toastCreatorMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void OnClickCreateToast(object sender, RoutedEventArgs e)
+        {
+            DateTimeOffset date = this.triggerDate.Date;
+            TimeSpan time = this.triggerHour.Time;
+            DateTimeOffset toastOffset = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
+            ToastManager manager = new ToastManager();
+            string toastHeader = "Влак <" + this.DepartureStation.Text + " - " + this.ArrivalStation.Text + "> ";
+            string toastContent = "заминава в " + this.DepartureTime.Text + " на " + this.DepartureDate.Text;
+            manager.SendScheduledToast(toastHeader, toastContent, toastOffset);
+            this.toastCreatorMenu.Visibility = Visibility.Collapsed;
         }
     }
 }
