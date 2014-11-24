@@ -106,6 +106,7 @@
             
             
             <ListView Grid.Column="0"
+                      
                       Name="transitionDetails"
                       Grid.ColumnSpan="2"
                       Height="320"

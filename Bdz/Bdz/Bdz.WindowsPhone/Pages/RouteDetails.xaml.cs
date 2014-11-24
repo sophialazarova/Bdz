@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,12 +20,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Bdz.Pages
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class RouteDetails : Page
     {
         private NavigationHelper navigationHelper;
@@ -145,12 +143,22 @@ namespace Bdz.Pages
         {
             DateTimeOffset date = this.triggerDate.Date;
             TimeSpan time = this.triggerHour.Time;
+
+            // must be validated that chosen date is not past, but emulator time is not with out time zone so comparison fails.
+            //Should change emulator time zone but I'm lazy..
+            // if ((date == DateTime.Now.Date && time < DateTime.Now.TimeOfDay) || date < DateTime.Now.Date)
+            // {
+            //     MessageDialog msg = new MessageDialog("Chosen date is past!");
+            // }
+
             DateTimeOffset toastOffset = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
             ToastManager manager = new ToastManager();
             string toastHeader = "Влак <" + this.DepartureStation.Text + " - " + this.ArrivalStation.Text + "> ";
             string toastContent = "заминава в " + this.DepartureTime.Text + " на " + this.DepartureDate.Text;
             manager.SendScheduledToast(toastHeader, toastContent, toastOffset);
             this.toastCreatorMenu.Visibility = Visibility.Collapsed;
+
+
         }
     }
 }

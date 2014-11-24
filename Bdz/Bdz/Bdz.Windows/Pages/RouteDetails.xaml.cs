@@ -1,4 +1,5 @@
 ﻿using Bdz.Common;
+using Bdz.Utilities;
 using Bdz.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -105,5 +106,7 @@ namespace Bdz.Pages
         }
 
         #endregion
+
+
     }
 }

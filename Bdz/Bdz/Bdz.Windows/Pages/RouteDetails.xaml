@@ -76,12 +76,17 @@
                         HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding DepartureStation}"
+                               Name="DepartureStation"
                                Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
                     <TextBlock Text="-"
                                Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
                     <TextBlock Text="{Binding ArrivalStation}"
+                               Name="ArrivalStation"
                                Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
                 </StackPanel>
+                <TextBlock Text="{Binding Date}"
+                           Name="DepartureDate"
+                           Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1"
                             Grid.Column="1">
@@ -89,6 +94,7 @@
                     <TextBlock Text="Заминава:"
                                Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
                     <TextBlock Text="{Binding DepartureTime}"
+                               Name="DepartureTime"
                                Style="{StaticResource RouteListItemDataStyle}"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -119,7 +125,7 @@
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ItemsSource="{Binding Route}"
                       ItemTemplate="{StaticResource RouteTransitionDetailTemplate}" >
-        </ListView>
-    </Grid>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

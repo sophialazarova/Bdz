@@ -5,6 +5,7 @@
     using System.Text;
     using Windows.Data.Xml.Dom;
     using Windows.UI.Notifications;
+    using Windows.UI.Popups;
 
    public class ToastManager
     {
@@ -25,11 +26,14 @@
            ToastNotificationManager.CreateToastNotifier().Show(toast);
        }
 
-       public void SendScheduledToast(string heading, string content, DateTimeOffset trigger)
+       public  void SendScheduledToast(string heading, string content, DateTimeOffset trigger)
        {
            this.FillToast(heading, content);
            ScheduledToastNotification toast = new ScheduledToastNotification(this.toastTemplateXml, trigger);
            ToastNotificationManager.CreateToastNotifier().AddToSchedule(toast);
+          //MessageDialog msg = new MessageDialog("Известието и запазено.");
+          //await msg.ShowAsync();
+
        }
 
        private void FillToast(string heading, string content)
