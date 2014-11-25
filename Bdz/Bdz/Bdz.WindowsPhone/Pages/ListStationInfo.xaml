@@ -71,6 +71,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <ListView Visibility="Collapsed"
+                      ItemContainerStyle="{StaticResource DisabledSelectAnimationStyle}"
                       Grid.Row="0"
                       Height="450"
                       HorizontalAlignment="Stretch"
@@ -79,6 +80,7 @@
                       ItemsSource="{Binding Arrival}"
                       ItemTemplate="{StaticResource TrainListItemTemplate}"></ListView>
             <ListView Visibility="Visible"
+                      ItemContainerStyle="{StaticResource DisabledSelectAnimationStyle}"
                       Grid.Row="0"
                       Name="departureList"
                       Height="450"

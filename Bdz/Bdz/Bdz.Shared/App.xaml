@@ -44,13 +44,16 @@
 
         <Style x:Name="TrainListItemTextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="DarkCyan"/>
+            <Setter Property="Foreground" Value="Cyan"/>
         </Style>
 
         <Style TargetType="TextBlock" x:Key="RouteDetailsLabelStyle">
-            <Setter Property="Foreground" Value="DarkCyan"/>
+            <Setter Property="Foreground" Value="Cyan"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Margin" Value="0 0 4 0"/>
+        </Style>
+        <Style TargetType="ListViewItem" x:Key="DisabledSelectAnimationStyle">
+            <Setter Property="IsEnabled" Value="False"/>
         </Style>
 
         <DataTemplate x:Name="ToSearchForRoutesViewTemplate">
@@ -83,6 +86,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding Town}"
                            Grid.Row="0"
+                           Foreground="White"
                            HorizontalAlignment="Stretch"
                            FontSize="27"></TextBlock>
                 <StackPanel Orientation="Horizontal"

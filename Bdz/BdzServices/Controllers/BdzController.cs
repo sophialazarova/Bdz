@@ -49,7 +49,7 @@
 
 
                 var details = detailedInformation.Select(node => node.InnerText.Trim()
-                   .Replace("\r\n", string.Empty).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList()).ToList();
+                   .Replace("\r\n", string.Empty).Split(new string[] { "  " }, StringSplitOptions.RemoveEmptyEntries).ToList()).ToList();
                 var partsToRemove = new List<string> {"Влак",
                                                        "Гара/Спирка",
                                                        "Състав",
@@ -63,6 +63,10 @@
                                                        "на",
                                                        "маршрута",
                                                        "Цени",
+                                                       " Вариант за печат",
+                                                       "Карта на маршрута",
+                                                       " Цени",
+                                                       "Вариант за печат",
                                                        "|"};
                 foreach (var entry in details)
                 {

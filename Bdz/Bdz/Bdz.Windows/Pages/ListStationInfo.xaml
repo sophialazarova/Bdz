@@ -84,6 +84,7 @@
             </StackPanel>
 
             <ListView Visibility="Visible"
+                      ItemContainerStyle="{StaticResource DisabledSelectAnimationStyle}"
                       Grid.Row="1"
                       Grid.Column="1"
                       Height="450"
@@ -94,6 +95,7 @@
                       ItemTemplate="{StaticResource TrainListItemTemplate}"
                       SelectionMode="None"></ListView>
             <ListView Visibility="Visible"
+                      ItemContainerStyle="{StaticResource DisabledSelectAnimationStyle}"
                       Grid.Row="1"
                       Grid.Column="2"
                       Name="departureList"

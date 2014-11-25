@@ -118,7 +118,8 @@
                 </StackPanel>
             </StackPanel>
             <ListView Grid.Column="2"
-                  Grid.Row="1"
+                      ItemContainerStyle="{StaticResource DisabledSelectAnimationStyle}"
+                      Grid.Row="1"
                       Name="transitionDetails"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
