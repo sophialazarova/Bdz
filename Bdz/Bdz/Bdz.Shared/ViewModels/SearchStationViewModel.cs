@@ -18,16 +18,30 @@
         private DateTimeOffset date = DateTime.Today;
         private StationInfoRequestObject searchAnswer;
         private bool isActive;
+        private bool isBackgroundAvailable;
 
         public SearchStationViewModel()
         {
             this.remoteManager = new RemoteDataManager();
             this.searchAnswer = new StationInfoRequestObject();
             this.isActive = false;
+            this.isBackgroundAvailable = true;
 
         }
 
         public string Station { get; set; }
+        public bool IsBackgroundAvailable
+        {
+            get
+            {
+                return this.isBackgroundAvailable;
+            }
+            set
+            {
+                this.isBackgroundAvailable = value;
+                RaisePropertyChanged<bool>("IsBackgroundAvailable", !this.isBackgroundAvailable, this.isBackgroundAvailable, true);
+            }
+        }
 
         public bool IsProgressRingActive 
         {
@@ -82,6 +96,7 @@
             }
             else
             {
+                this.IsBackgroundAvailable = false;
                 this.IsProgressRingActive = true;
                 string pickedDate = CommonUtilities.FormatDate(this.date);
                 this.searchAnswer = await this.remoteManager.GetStationInfo(this.Station, pickedDate);
@@ -91,6 +106,7 @@
 
                     MessageDialog message = new MessageDialog("Грешка на сървъра. Опитайте по-късно.");
                     await message.ShowAsync();
+                    this.IsBackgroundAvailable = true;
                 }
                 else
                 {

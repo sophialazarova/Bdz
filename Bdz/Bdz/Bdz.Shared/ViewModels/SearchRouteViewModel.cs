@@ -16,16 +16,34 @@
 
     public class SearchRouteViewModel : ViewModelBase
     {
+  
         private ICommand onSearchButtonClick;
         private RemoteDataManager remoteManager;
         private RouteInfoRequestObject currentRouteInfo;
         private DateTimeOffset date = DateTime.Today;
         private bool isActive;
+        private bool isBackgroundAvailable;
 
         public SearchRouteViewModel()
         {
             this.remoteManager = new RemoteDataManager();
+            this.MinimalSelectionDate = DateTime.Now;
             this.isActive = false;
+            this.isBackgroundAvailable = true;
+        }
+        public DateTimeOffset MinimalSelectionDate { get; private set; }
+
+        public bool IsBackgroundAvailable
+        {
+            get
+            {
+                return this.isBackgroundAvailable;
+            }
+            set
+            {
+                this.isBackgroundAvailable = value;
+                RaisePropertyChanged<bool>("IsBackgroundAvailable", !this.isBackgroundAvailable, this.isBackgroundAvailable, true);
+            }
         }
 
         public string From { get; set; }
@@ -63,7 +81,7 @@
             {
                 if (this.onSearchButtonClick == null)
                 {
-                    this.onSearchButtonClick = new RelayCommand<FrameworkElement>( param => this.SearchForRoute(param));
+                    this.onSearchButtonClick = new RelayCommand<FrameworkElement>(param => this.SearchForRoute(param));
                 }
 
                 return this.onSearchButtonClick;
@@ -84,6 +102,7 @@
             }
             else
             {
+                this.IsBackgroundAvailable = false;
                 this.IsProgressRingActive = true;
                 string pickedDate = CommonUtilities.FormatDate(this.date);
                 this.currentRouteInfo = await remoteManager.GetRouteInfo(this.From, this.To, pickedDate);
@@ -92,6 +111,7 @@
                     this.IsProgressRingActive = false;
                     MessageDialog message = new MessageDialog("Няма намерени резултати!");
                     await message.ShowAsync();
+                    this.IsBackgroundAvailable = true;
                 }
                 else
                 {
@@ -104,7 +124,7 @@
                     var frame = (userControl as Page).Frame;
                     frame.Navigate(typeof(ListRoutes));
                 }
-            }         
+            }
         }
     }
 }
