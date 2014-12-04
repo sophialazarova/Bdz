@@ -85,7 +85,8 @@
             else
             {
                 this.IsProgressRingActive = true;
-                this.currentRouteInfo = await remoteManager.GetRouteInfo(this.From, this.To, this.Date.Day + "/" + this.Date.Month + "/" + this.Date.Year);
+                string pickedDate = CommonUtilities.FormatDate(this.date);
+                this.currentRouteInfo = await remoteManager.GetRouteInfo(this.From, this.To, pickedDate);
                 if (this.currentRouteInfo.Routes == null || this.currentRouteInfo == null)
                 {
                     this.IsProgressRingActive = false;

@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\TrainTransition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SQLiteAsync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\CommonUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ToastManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ViewDataTransferHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\RemoteDataManager.cs" />

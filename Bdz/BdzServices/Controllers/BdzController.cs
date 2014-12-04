@@ -20,6 +20,8 @@
 
             var client = new HttpClient();
 
+            string a = "\\\"Златни Пясъци\\\"";
+            bool s = a.StartsWith("\\\"");
             HttpRequestMessage request = new HttpRequestMessage();
             request.RequestUri = new Uri(url);
             request.Method = HttpMethod.Post;
@@ -129,7 +131,7 @@
 
         private void removeExtraParts(IList<string> extras, List<string> removeFrom)
         {
-            removeFrom.RemoveAll(row => extras.IndexOf(row) >= 0);
+            removeFrom.RemoveAll(row => extras.IndexOf(row) >= 0 || row.StartsWith("\""));
         }
 
         private IDictionary<string, IList<Route>> ParseRouteInfo(IList<string[]> basic, IList<List<string>> detailed)

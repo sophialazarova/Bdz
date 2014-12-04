@@ -42,8 +42,8 @@
            request.RequestUri = new Uri(getRouteInfoUrl + "?from=" + from + "&to=" + to + "&date=" + date);
            var response = await client.SendAsync(request);
            var content = await response.Content.ReadAsStringAsync();
-           int a = 9;
            var contentAsJson = this.DeserializeJson<RouteInfoRequestObject>(content);
+           int a = 9;
            return contentAsJson;
        }
 
