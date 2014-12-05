@@ -10,6 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -211,6 +212,15 @@ namespace Bdz.Pages
             else if (matched.Count == 0)
             {
                 suggestions.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            DateTimeOffset now = DateTime.Now;
+            if (e.NewDate < now)
+            {
+                (sender as DatePicker).Date = now;
             }
         }
     }

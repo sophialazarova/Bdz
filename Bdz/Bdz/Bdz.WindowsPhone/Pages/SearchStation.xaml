@@ -50,6 +50,7 @@
                      SelectionChanged="SuggestionsToStationSelectionChanged"></ListBox>
             <DatePicker Grid.Row="2"
                         Name="datePicker"
+                        DateChanged="datePicker_DateChanged"
                         Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Търси"
                     Grid.Row="3"

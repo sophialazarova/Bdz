@@ -160,5 +160,23 @@ namespace Bdz.Pages
 
 
         }
+
+        private void triggerDate_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            DateTimeOffset now = DateTime.Now;
+            if (e.NewDate < now)
+            {
+                (sender as DatePicker).Date = now;
+            }
+        }
+
+        private void triggerHour_TimeChanged(object sender, TimePickerValueChangedEventArgs e)
+        {
+            DateTimeOffset now = DateTime.Now;
+            if (e.OldTime < now.TimeOfDay)
+            {
+                (sender as TimePicker).Time = now.AddMinutes(1).TimeOfDay;
+            }
+        }
     }
 }

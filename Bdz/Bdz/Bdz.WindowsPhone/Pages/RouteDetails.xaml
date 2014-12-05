@@ -136,8 +136,11 @@
                 <TextBlock Text="Извести ме за потеглянето на този влак на:"
                            FontSize="18"
                            ></TextBlock>
-                <DatePicker Name="triggerDate"></DatePicker>
-                <TimePicker Name="triggerHour"></TimePicker>
+                <DatePicker Name="triggerDate"
+                            DateChanged="triggerDate_DateChanged"></DatePicker>
+                <TimePicker Name="triggerHour"
+                            
+                            TimeChanged="triggerHour_TimeChanged"></TimePicker>
             </StackPanel>
             <Button Grid.Row="2"
                     Content="Запази"

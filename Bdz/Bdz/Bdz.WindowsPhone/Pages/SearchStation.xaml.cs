@@ -179,5 +179,14 @@ namespace Bdz.Pages
                     }
             }
         }
+
+        private void datePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            DateTimeOffset now = DateTime.Now;
+            if (e.NewDate < now)
+            {
+                (sender as DatePicker).Date = now;
+            }
+        }
     }
 }

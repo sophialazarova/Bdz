@@ -65,6 +65,7 @@
                      SelectionChanged="EndStationListboxSelectionChanged"/>
             
             <DatePicker Grid.Row="6"
+                        DateChanged="DatePicker_DateChanged"
                         MinYear="{Binding MinimalSelectionDate}"
                         Date="{Binding Date, Mode=TwoWay}"></DatePicker>
             
