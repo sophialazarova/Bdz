@@ -3,6 +3,7 @@
     using SQLite;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Text;
     using System.Threading.Tasks;
     using Windows.Storage;
@@ -110,13 +111,15 @@
             if (towns.Count == 0)
             {
                 var townsRange = this.AddTownsToList();
+                int a = 7;
                 await this.AddRange(townsRange);
             }
         }
 
         public  async Task AddRange<T>(List<T> range)
         {
-            await db.InsertAllAsync(range);
+            int x =  await db.InsertAllAsync(range);
+            int s = 4;
         }
 
         public async Task<List<Town>> RetrieveTownTable()
@@ -131,7 +134,13 @@
             List<Town> townList = new List<Town>();
             for (int i = 0; i < this.towns.Count; i++)
             {
-                townList.Add(new Town(this.towns[i]));
+                var Town = new Town()
+                {
+                    Name = this.towns[i],
+                    
+                };
+
+                townList.Add(Town);
             }
 
             return townList;

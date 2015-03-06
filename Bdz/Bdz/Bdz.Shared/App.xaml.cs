@@ -99,7 +99,7 @@ namespace Bdz
                         this.transitions.Add(c);
                     }
                 }
-                await this.GetDeviceCurrentLocation();
+                //await this.GetDeviceCurrentLocation();
                 rootFrame.ContentTransitions = null;
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 #endif
@@ -175,7 +175,7 @@ namespace Bdz
             catch (Exception ex)
             {
                 MessageDialog error = new MessageDialog("Unable to determine current location.");
-                error.ShowAsync();
+                 error.ShowAsync();
             }
         }
 #endif

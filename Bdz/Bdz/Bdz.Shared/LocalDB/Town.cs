@@ -5,10 +5,6 @@
     [Table("Towns")]
    public class Town
     {
-        public Town(string name)
-        {
-            this.Name = name;
-        }
 
         public Town() { }
 

@@ -143,22 +143,12 @@ namespace Bdz.Pages
         {
             DateTimeOffset date = this.triggerDate.Date;
             TimeSpan time = this.triggerHour.Time;
-
-            // must be validated that chosen date is not past, but emulator time is not with out time zone so comparison fails.
-            //Should change emulator time zone but I'm lazy..
-            // if ((date == DateTime.Now.Date && time < DateTime.Now.TimeOfDay) || date < DateTime.Now.Date)
-            // {
-            //     MessageDialog msg = new MessageDialog("Chosen date is past!");
-            // }
-
             DateTimeOffset toastOffset = new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
             ToastManager manager = new ToastManager();
             string toastHeader = "Влак <" + this.DepartureStation.Text + " - " + this.ArrivalStation.Text + "> ";
             string toastContent = "заминава в " + this.DepartureTime.Text + " на " + this.DepartureDate.Text;
             manager.SendScheduledToast(toastHeader, toastContent, toastOffset);
             this.toastCreatorMenu.Visibility = Visibility.Collapsed;
-
-
         }
 
         private void triggerDate_DateChanged(object sender, DatePickerValueChangedEventArgs e)
